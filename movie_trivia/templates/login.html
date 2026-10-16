@@ -1,0 +1,29 @@
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/static/styles.css" rel="stylesheet">
+
+<head>
+   <h1>{% block title %}{% endblock %} Login</h1>
+</head>
+
+{% block body %}
+    <form action="/login" method="post">
+        <div class="register_container">
+            <p>
+                <input autocomplete="off" autofocus class="register_btn" name="username" placeholder="Username" type="text">
+            </p>
+            <p>
+                <input class="register_btn" name="password" placeholder="Password" type="password">
+            </p>
+            <p>
+                <button class="register_btn" type="submit">Login</button>
+            </p>
+            <style>
+                body {
+                    background-image: linear-gradient(to right, rgb(32, 82, 148), rgb(10, 49, 100));
+                    background-size: cover;
+                    width: 100%;
+                }
+            </style>
+    </form>
+{% endblock %}

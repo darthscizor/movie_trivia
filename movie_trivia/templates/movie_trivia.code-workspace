@@ -1,0 +1,24 @@
+{
+    "folders": [
+        {
+            "name": "templates",
+            "path": "."
+        },
+        {
+            "name": "__pycache__",
+            "path": "../__pycache__"
+        },
+        {
+            "name": "bin",
+            "path": "../bin"
+        },
+        {
+            "name": "include",
+            "path": "../include"
+        },
+        {
+            "name": "static",
+            "path": "../static"
+        }
+    ]
+}

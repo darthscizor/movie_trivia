@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="/static/styles.css" rel="stylesheet">
+    </head>
+    <body>
+        <nav>
+            <div class="container-fluid">
+                <div class="collapse navbar-collapse" id="navbar">
+                    {% if session["id"] %}
+                        <ul class="navbar-nav me-auto mt-2">
+                            <li class="nav-item"><a href="/register" class="link">Register</a></li>
+                            <li class="nav-item"><a href="/logout" class="link">Logout</a></li>
+                            <li class="nav-item"><a href="/account_info" class="link">Account Info</a></li>
+                        </ul>
+                    {% else %}
+                        <ul class="navbar-nav me-auto mt-2">
+                            <li class="nav-item"><a href="/register" class="link">Register</a></li>
+
+                        </ul>
+                    {% endif %}
+                </div>
+            </div>
+        </nav>
+        <div class="title_box">
+            <h1>Welcome to my Movie Trivia Quiz!</h1>      
+        </div>
+            {% if session["id"] %}
+                <div class="start_btn_container">
+                    <a href="/question"><button type="submit" class="start_btn">Start Quiz</button></a>
+                </div>
+            {% else %}
+                <div class="description_container">
+                    <div class="description_box">Test your knowledge of movies with this fun and challenging 10 question quiz! If you're new here please register with the above link.  If you already have an account, please login by clicking the link below.</div>
+                </div>
+                <div class="start_btn_container">
+                    <a href="/login"><button type="submit" class="start_btn">Login</button></a>
+                </div>
+            {% endif %}
+        <style>
+            body {
+                background-image: linear-gradient(to right, rgb(32, 82, 148), rgb(10, 49, 100));
+                background-size: cover;
+                width: 100%;
+            }
+        </style>
+    </body>
+</html>

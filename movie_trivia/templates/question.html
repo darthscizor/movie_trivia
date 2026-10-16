@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/static/styles.css" rel="stylesheet">
+{% block title %}
+<p>
+    <li id="question_number">
+        Question {{ question_number }}
+    </li>
+    <div class = "score">
+        Score: {{ score }}
+    </div>
+</p>
+{% endblock %}   
+
+{% block main %}
+    <li>{{ question[0][0] }}</li>
+    <form action="/question" type="submit" method="post">
+    <div class="choice-container">
+    <p>
+        <button type="button" id="0_choice" onclick="changeColor(0, {{ question[0][3] }})" class="choice_button">
+            A. {{ question[0][1] }}
+        </button>
+    </p>
+    <p>
+        <button type="button" id="1_choice" onclick="changeColor(1, {{ question[1][3] }})" class="choice_button">
+            B. {{ question[1][1] }}
+        </button>
+    </p>
+    <p>
+        <button type="button" id="2_choice" onclick="changeColor(2, {{ question[2][3] }})" class="choice_button">
+            C. {{ question[2][1] }}
+        </button>
+    </p>
+    <p>
+        <button type="button" id="3_choice" onclick="changeColor(3, {{ question[3][3] }})" class="choice_button">
+            D. {{ question[3][1] }}
+        </button>
+    </p> 
+    </div>
+    <button type="submit" onclick="allowNavigation()" class="next_btn" name="action" value="next">Next Question</button>
+    <input type="hidden" name="choice" id="selected_choice">
+    <a href="/"><button type="submit" class="next_btn" name="action" value="exit">Exit Quiz</button></a>
+    </form>
+    <style>
+        body {
+            background-image: linear-gradient(to right, rgb(32, 82, 148), rgb(10, 49, 100));
+            background-size: cover;
+            width: 100%;
+        }
+    </style>
+    <script>
+        const buttons = document.querySelectorAll(".choice_button");
+        let score = {{ score }};
+        let question_number = {{ question_number }};
+        let answered = false;
+        window.onbeforeunload = function () {
+            return true;
+        };
+        function allowNavigation() {
+            window.onbeforeunload = null;
+        };
+        function changeColor(arg, choiceId) {
+            const question = {{ question | tojson }};
+            console.log(question);
+            var isCorrect = question[arg][2] === 1;
+            if (isCorrect) {
+                document.getElementById(arg + "_choice").style.backgroundColor = "green";
+                document.getElementById(arg + "_choice").style.color = "white";
+            } else {
+                const correctIndex = question.findIndex(choice => choice[2] === 1);
+                document.getElementById(correctIndex + "_choice").style.backgroundColor = "green";
+                document.getElementById(correctIndex + "_choice").style.color = "white";
+                document.getElementById(arg + "_choice").style.backgroundColor = "red";
+                document.getElementById(arg + "_choice").style.color = "white";
+            }
+            document.getElementById("selected_choice").value = choiceId;
+            buttons.forEach(button => button.disabled = true);
+        }
+    </script>       
+{% endblock %}
